@@ -4,6 +4,7 @@ import { z } from "zod";
 
 const CreateItem = z.object({
   title: z.string(),
+  description: z.string().optional(),
 });
 
 export default resolver.pipe(resolver.zod(CreateItem), resolver.authorize(), async (input, ctx) => {
