@@ -67,5 +67,8 @@
     "vite-tsconfig-paths": "3.6.0",
     "vitest": "0.25.3"
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "cssnano-preset-simple": "3.0.0"
+  }
 }

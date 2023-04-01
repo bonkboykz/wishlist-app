@@ -7,7 +7,7 @@ services:
     name: wishlist-app
     env: node
     plan: free
-    buildCommand: yarn --prod=false &&
+    buildCommand: yarn --frozen-lockfile --prod=false &&
       blitz prisma generate &&
       blitz build &&
       blitz prisma migrate deploy
