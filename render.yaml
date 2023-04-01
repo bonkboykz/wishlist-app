@@ -7,7 +7,7 @@ services:
     name: wishlist-app
     env: node
     plan: free
-    buildCommand: npm install &&
+    buildCommand: yarn --prod=false &&
       blitz prisma generate &&
       blitz build &&
       blitz prisma migrate deploy
