@@ -6,9 +6,10 @@ import { z } from "zod";
 const GetList = z.object({
   id: z.number().optional(),
   accessToken: z.string().optional(),
+  includeOwner: z.boolean().optional(),
 });
 
-export default resolver.pipe(resolver.zod(GetList), async ({ id, accessToken }) => {
+export default resolver.pipe(resolver.zod(GetList), async ({ id, accessToken, includeOwner }) => {
   if (accessToken) {
     return await db.list.findFirstOrThrow({
       where: { accessToken },
@@ -18,6 +19,7 @@ export default resolver.pipe(resolver.zod(GetList), async ({ id, accessToken }) 
             reservedBy: true,
           },
         },
+        owner: Boolean(includeOwner),
       },
     });
   }
@@ -31,6 +33,7 @@ export default resolver.pipe(resolver.zod(GetList), async ({ id, accessToken }) 
             reservedBy: true,
           },
         },
+        owner: Boolean(includeOwner),
       },
     });
   } catch (e) {

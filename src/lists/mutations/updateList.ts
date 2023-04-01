@@ -17,7 +17,7 @@ export default resolver.pipe(
     const list = await db.list.update({
       where: { id },
       data,
-      include: { items: { include: { reservedBy: true } } },
+      include: { items: { include: { reservedBy: true } }, owner: true },
     });
 
     return list;

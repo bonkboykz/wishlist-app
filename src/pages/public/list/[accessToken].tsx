@@ -15,7 +15,10 @@ import { toast } from "react-hot-toast";
 
 export const List = () => {
   const listAccessToken = useParam("accessToken", "string");
-  const [list, { refetch }] = useQuery(getList, { accessToken: listAccessToken });
+  const [list, { refetch }] = useQuery(getList, {
+    accessToken: listAccessToken,
+    includeOwner: true,
+  });
   const [reserveItemMutation] = useMutation(reserveItem);
   const [freeItemMutation] = useMutation(freeItem);
 
@@ -24,11 +27,11 @@ export const List = () => {
   return (
     <>
       <Head>
-        <title>List {list.title}</title>
+        <title>List of {list.owner.email}</title>
       </Head>
 
       <div>
-        <h1 className="text-xl">List {list.title}</h1>
+        <h1 className="text-2xl">List of {list.owner.email}</h1>
 
         <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {list.items.map((item) => (
