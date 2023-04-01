@@ -2,7 +2,8 @@ import { forwardRef, PropsWithoutRef, ComponentPropsWithoutRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
-export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
+export interface LabeledTextAreaFieldProps
+  extends PropsWithoutRef<JSX.IntrinsicElements["textarea"]> {
   /** Field name. */
   name: string;
   /** Field label. */
@@ -13,7 +14,7 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   labelProps?: ComponentPropsWithoutRef<"label">;
 }
 
-export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
+export const LabeledTextAreaField = forwardRef<HTMLInputElement, LabeledTextAreaFieldProps>(
   ({ label, outerProps, labelProps, name, ...props }, ref) => {
     const {
       register,
@@ -24,7 +25,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       <div {...outerProps}>
         <label {...labelProps}>
           {label}
-          <input disabled={isSubmitting} {...props} {...register(name)} />
+          <textarea disabled={isSubmitting} {...props} {...register(name)} />
         </label>
 
         <ErrorMessage
@@ -58,4 +59,4 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
   }
 );
 
-export default LabeledTextField;
+export default LabeledTextAreaField;
