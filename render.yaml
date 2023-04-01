@@ -7,8 +7,11 @@ services:
     name: wishlist-app
     env: node
     plan: free
-    buildCommand: npm ci --include=dev && blitz build && blitz prisma migrate deploy
-    startCommand: blitz start
+    buildCommand: yarn --frozen-lockfile --prod=false &&
+      blitz prisma generate &&
+      blitz build &&
+      blitz prisma migrate deploy
+    startCommand: blitz start -p ${PORT}
     envVars:
       - key: NODE_ENV
         value: production
