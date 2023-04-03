@@ -13,19 +13,29 @@ import getItems from "src/items/queries/getItems";
 import addItemToList from "src/lists/mutations/addItemToList";
 import removeItemFromList from "src/lists/mutations/removeItemFromList";
 import { toast } from "react-hot-toast";
+import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 
 export const List = () => {
   const router = useRouter();
   const listId = useParam("listId", "number");
   const [deleteListMutation] = useMutation(deleteList);
   const [list, { refetch }] = useQuery(getList, { id: listId });
+  const user = useCurrentUser();
+
   const [{ items: notInListItems }] = useQuery(getItems, {
     where: {
-      NOT: {
-        id: {
-          in: list.items.map((item) => item.id),
+      AND: [
+        {
+          NOT: {
+            id: {
+              in: list.items.map((item) => item.id),
+            },
+          },
         },
-      },
+        {
+          ownerId: user?.id,
+        },
+      ],
     },
   });
 
