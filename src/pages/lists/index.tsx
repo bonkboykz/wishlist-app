@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Routes } from "@blitzjs/next";
+import { BlitzPage, Routes } from "@blitzjs/next";
 import Head from "next/head";
 import Link from "next/link";
 import { usePaginatedQuery } from "@blitzjs/rpc";
@@ -61,7 +61,7 @@ export const ListsList = () => {
   );
 };
 
-const ListsPage = () => {
+const ListsPage: BlitzPage = () => {
   return (
     <Layout>
       <Head>
@@ -81,6 +81,10 @@ const ListsPage = () => {
       </div>
     </Layout>
   );
+};
+
+ListsPage.authenticate = {
+  redirectTo: Routes.LoginPage(),
 };
 
 export default ListsPage;

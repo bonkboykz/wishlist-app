@@ -12,6 +12,7 @@ import reserveItem from "src/items/mutations/reserveItem";
 import freeItem from "src/items/mutations/freeItem";
 import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
+import getShops from "src/shops/queries/getShops";
 
 export const List = () => {
   const listAccessToken = useParam("accessToken", "string");
@@ -21,6 +22,10 @@ export const List = () => {
   });
   const [reserveItemMutation] = useMutation(reserveItem);
   const [freeItemMutation] = useMutation(freeItem);
+
+  const [{ shops: ownerShops }] = useQuery(getShops, {
+    where: { ownerId: list.ownerId, public: true },
+  });
 
   const user = useCurrentUser();
 
@@ -76,6 +81,24 @@ export const List = () => {
                       </button>
                     )}
                   </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="text-xl mt-4">Favourite shops</h2>
+        <h3 className="text-lg my-2">
+          This user likes these shops. You could find something else in there
+        </h3>
+
+        <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {ownerShops.map((shop) => (
+            <li key={shop.id}>
+              <div className="card card-compact bg-base-100 shadow-xl">
+                <div className="card-body">
+                  <h2 className="card-title">{shop.title}</h2>
+                  <p>{shop.description}</p>
                 </div>
               </div>
             </li>

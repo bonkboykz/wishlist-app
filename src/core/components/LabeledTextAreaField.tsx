@@ -45,7 +45,7 @@ export const LabeledTextAreaField = forwardRef<HTMLTextAreaElement, LabeledTextA
             align-items: start;
             font-size: 1rem;
           }
-          input {
+          textarea {
             font-size: 1rem;
             padding: 0.25rem 0.5rem;
             border-radius: 3px;

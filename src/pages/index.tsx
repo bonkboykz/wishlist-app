@@ -9,9 +9,9 @@ import { Routes, BlitzPage } from "@blitzjs/next";
 const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
-      <div>
-        <Link href={Routes.ListsPage()}>Lists</Link>
-        <Link href={Routes.ItemsPage()}>Items</Link>
+      <div className="flex gap-4">
+        <Link href={Routes.ListsPage()}>Your Lists</Link>
+        <Link href={Routes.ItemsPage()}>Your Items</Link>
       </div>
     </Layout>
   );

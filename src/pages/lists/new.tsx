@@ -41,6 +41,8 @@ const NewListPage = () => {
   );
 };
 
-NewListPage.authenticate = true;
+NewListPage.authenticate = {
+  redirectTo: Routes.LoginPage(),
+};
 
 export default NewListPage;

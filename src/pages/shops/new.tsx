@@ -3,28 +3,29 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMutation } from "@blitzjs/rpc";
 import Layout from "src/core/layouts/Layout";
-import createItem from "src/items/mutations/createItem";
-import { ItemForm, FORM_ERROR } from "src/items/components/ItemForm";
+import createShop from "src/shops/mutations/createShop";
+import { ShopForm, FORM_ERROR } from "src/shops/components/ShopForm";
 
-const NewItemPage = () => {
+const NewShopPage = () => {
   const router = useRouter();
-  const [createItemMutation] = useMutation(createItem);
+  const [createShopMutation] = useMutation(createShop);
 
   return (
-    <Layout title={"Create New Item"}>
-      <h1>Create New Item</h1>
+    <Layout title={"Create New Shop"}>
+      <h1>Create New Shop</h1>
 
-      <ItemForm
-        submitText="Create Item"
+      <ShopForm
+        submitText="Create Shop"
         // TODO use a zod schema for form validation
         //  - Tip: extract mutation's schema into a shared `validations.ts` file and
         //         then import and use it here
-        // schema={CreateItem}
+        // schema={CreateShop}
         // initialValues={{}}
         onSubmit={async (values) => {
           try {
-            const item = await createItemMutation(values);
-            await router.push(Routes.ShowItemPage({ itemId: item.id }));
+            const shop = await createShopMutation(values);
+            await router.push(Routes.ShopsPage());
+            // await router.push(Routes.ShowShopPage({ shopId: shop.id }));
           } catch (error: any) {
             console.error(error);
             return {
@@ -35,14 +36,12 @@ const NewItemPage = () => {
       />
 
       <p>
-        <Link href={Routes.ItemsPage()}>Items</Link>
+        <Link href={Routes.ShopsPage()}>Shops</Link>
       </p>
     </Layout>
   );
 };
 
-NewItemPage.authenticate = {
-  redirectTo: Routes.LoginPage(),
-};
+NewShopPage.authenticate = true;
 
-export default NewItemPage;
+export default NewShopPage;

@@ -69,7 +69,11 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
             </li>
 
             <li>
-              <Link href={Routes.ListsPage()}>Reservations</Link>
+              <Link href={Routes.ReservationsPage()}>Reservations</Link>
+            </li>
+
+            <li>
+              <Link href={Routes.ShopsPage()}>Shops</Link>
             </li>
           </ul>
         </div>

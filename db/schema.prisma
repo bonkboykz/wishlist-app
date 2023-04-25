@@ -26,6 +26,7 @@ model User {
   lists         List[]
   items         Item[]
   reservedItems Item[]    @relation("reservedBy")
+  shops         Shop[]
 }
 
 model Session {
@@ -87,4 +88,16 @@ model Item {
   lists        List[]
   title        String
   description  String?
+  bought       Boolean? @default(false)
+}
+
+model Shop {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String
+  description String?
+  owner       User     @relation(fields: [ownerId], references: [id])
+  ownerId     Int
+  public      Boolean? @default(true)
 }
