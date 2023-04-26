@@ -22,6 +22,18 @@ const NewItemPage = () => {
         // schema={CreateItem}
         // initialValues={{}}
         onSubmit={async (values) => {
+          if (Number.isNaN(values.price) || !values.price) {
+            delete values.price;
+          }
+
+          if (!values.description) {
+            delete values.description;
+          }
+
+          if (!values.currency) {
+            delete values.currency;
+          }
+
           try {
             const item = await createItemMutation(values);
             await router.push(Routes.ShowItemPage({ itemId: item.id }));

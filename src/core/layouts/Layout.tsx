@@ -4,6 +4,7 @@ import { BlitzLayout, Routes } from "@blitzjs/next";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
 import { useCurrentUser } from "src/users/hooks/useCurrentUser";
+import Image from "next/image";
 
 const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
   title,
@@ -13,7 +14,7 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
     <>
       <Head>
         <title>{title || "wishlist-app"}</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Toaster />
@@ -55,6 +56,7 @@ const Layout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = ({
             </ul>
           </div>
           <div className="normal-case text-xl flex items-center gap-2">
+            <Image src="/logo.svg" width={32} height={32} alt="Logo" />
             Wishlist <div className="badge badge-secondary">alpha</div>
           </div>
         </div>

@@ -40,6 +40,18 @@ export const EditItem = () => {
           // schema={UpdateItem}
           initialValues={item}
           onSubmit={async (values) => {
+            if (Number.isNaN(values.price) || !values.price) {
+              delete values.price;
+            }
+
+            if (!values.description) {
+              delete values.description;
+            }
+
+            if (!values.currency) {
+              delete values.currency;
+            }
+
             try {
               const updated = await updateItemMutation({
                 id: item.id,

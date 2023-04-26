@@ -89,6 +89,8 @@ model Item {
   title        String
   description  String?
   bought       Boolean? @default(false)
+  price        Float?
+  currency     String?
 }
 
 model Shop {

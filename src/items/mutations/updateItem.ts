@@ -6,6 +6,9 @@ const UpdateItem = z.object({
   id: z.number(),
   title: z.string().optional(),
   description: z.string().optional(),
+  bought: z.boolean().optional(),
+  price: z.number().optional(),
+  currency: z.string().optional(),
 });
 
 export default resolver.pipe(

@@ -12,7 +12,7 @@ const BaseLayout: BlitzLayout<{ title?: string; children?: React.ReactNode }> = 
     <>
       <Head>
         <title>{title || "wishlist-app"}</title>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Toaster />

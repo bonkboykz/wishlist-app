@@ -43,9 +43,14 @@ export const List = () => {
             <li key={item.id}>
               <div className="card card-compact bg-base-100 shadow-xl">
                 <div className="card-body">
-                  <h2 className="card-title">{item.title}</h2>
+                  <h2 className={`card-title ${item.bought ? "line-through" : ""}`}>
+                    {item.title}
+                  </h2>
+                  {item.bought && <p className="text-red-400">Bought</p>}
                   <p>{item.description}</p>
-
+                  <p className="text-green-400">
+                    {item.price} {item.currency}
+                  </p>
                   <p>
                     {item.reserved
                       ? `Reserved by ${item.reservedBy?.email ?? "Anonymous"}`

@@ -5,6 +5,9 @@ import { z } from "zod";
 const CreateItem = z.object({
   title: z.string(),
   description: z.string().optional(),
+  bought: z.boolean().optional(),
+  price: z.number().optional(),
+  currency: z.string().optional(),
 });
 
 export default resolver.pipe(resolver.zod(CreateItem), resolver.authorize(), async (input, ctx) => {

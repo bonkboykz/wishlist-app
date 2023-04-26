@@ -34,8 +34,13 @@ export const ItemsList = () => {
             <li key={item.id}>
               <div className="card card-compact bg-base-100 shadow-xl">
                 <div className="card-body">
-                  <h2 className="card-title">{item.title}</h2>
+                  <h2 className={`card-title ${item.bought ? "line-through" : ""}`}>
+                    {item.title}
+                  </h2>
                   <p>{item.description}</p>
+                  <p className="text-green-400">
+                    {item.price} {item.currency}
+                  </p>
 
                   <div className="card-actions justify-end">
                     <Link href={Routes.ShowItemPage({ itemId: item.id })} className="btn btn-sm">

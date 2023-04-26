@@ -27,6 +27,10 @@ export const Item = () => {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
               <h1 className="text-xl">{item.title}</h1>
+              <h3 className="text-green-400">
+                {item.price} {item.currency}
+              </h3>
+              <h4 className="">This item was {!item.bought && "not"} bought</h4>
               <p className="">{item.description}</p>
             </div>
             <div className="flex flex-row gap-2">
