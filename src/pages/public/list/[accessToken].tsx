@@ -13,6 +13,7 @@ import freeItem from "src/items/mutations/freeItem";
 import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 import { toast } from "react-hot-toast";
 import getShops from "src/shops/queries/getShops";
+import getLastCurrencyHistory from "src/currency-histories/queries/getLastCurrencyHistory";
 
 export const List = () => {
   const listAccessToken = useParam("accessToken", "string");
@@ -28,6 +29,15 @@ export const List = () => {
   });
 
   const user = useCurrentUser();
+
+  const { currency = "KZT" } = useRouter().query;
+
+  const targetCurrenty = Array.isArray(currency) ? currency.join("") : currency;
+
+  const [usdConversionRate] = useQuery(getLastCurrencyHistory, { from: "USD", to: targetCurrenty });
+  const [rubConversionRate] = useQuery(getLastCurrencyHistory, { from: "RUB", to: targetCurrenty });
+
+  console.log(usdConversionRate);
 
   return (
     <>
@@ -51,6 +61,16 @@ export const List = () => {
                   <p className="text-green-400">
                     {item.price} {item.currency}
                   </p>
+                  {item.currency === "USD" && (
+                    <p className="text-gray-400">
+                      {((usdConversionRate?.rate ?? 1) * (item.price ?? 0)).toFixed(2)} KZT
+                    </p>
+                  )}
+                  {item.currency === "RUB" && (
+                    <p className="text-gray-400">
+                      {((rubConversionRate?.rate ?? 1) * (item.price ?? 0)).toFixed(2)} KZT
+                    </p>
+                  )}
                   <p>
                     {item.reserved
                       ? `Reserved by ${item.reservedBy?.email ?? "Anonymous"}`

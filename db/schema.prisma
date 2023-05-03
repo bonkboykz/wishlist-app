@@ -103,3 +103,12 @@ model Shop {
   ownerId     Int
   public      Boolean? @default(true)
 }
+
+model CurrencyHistory {
+  id                  String   @id @default(cuid())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  transactionCurrency String
+  settlementCurrency  String
+  rate                Float
+}
